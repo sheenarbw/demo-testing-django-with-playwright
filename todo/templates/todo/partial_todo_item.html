@@ -19,6 +19,8 @@
         hx-get="{% url 'action_toggle_todo' item.id %}"
         hx-target="body"
         hx-swap="afterbegin"
+
+        data-testid="toggle_item_{{ item.id }}"
         />
         
         <span class="inline-block align-middle px-2 font-semibold font-normal
@@ -27,12 +29,12 @@
             </span>
         </div>
         <div>
-
             <button 
             hx-target="#item-{{ item.id }}" 
             hx-swap="outerHTML"
             hx-get="{% url 'action_delete_todo' item.id %}"   
             class="{{ styles.button_secondary }} inline-block align-middle"
+            data-testid="delete_item_{{ item.id }}"
             >
             Delete
         </button>

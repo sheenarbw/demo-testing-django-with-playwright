@@ -31,9 +31,17 @@
             
         </div>
 
-        <div class="text-center text-2xl font-bold text-transparent/30 pt-6" id="todo_items_empty">
-            Nothing to see
+        <div class="text-center text-2xl font-bold text-transparent/30 pt-6" id="todo_items_empty" 
+        data-testid="todo_items_empty"
+        {% if todo_items %}
+            style="display: none;"
+        {% endif %}
+
+        >
+            Nothing to see here...
         </div>
+
+       
     
 </div>
 

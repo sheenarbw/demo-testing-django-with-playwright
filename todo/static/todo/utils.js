@@ -25,5 +25,5 @@ window.onload = function () {
 
   observer.observe(targetNode, config);
 
-  todoListShowIfEmpty();
+  // todoListShowIfEmpty();
 };
