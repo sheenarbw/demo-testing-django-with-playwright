@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from . import views
 
@@ -15,4 +17,4 @@ urlpatterns = [
     path("action_delete_todo/<int:item_id>", views.action_delete_todo, name="action_delete_todo"),
 
     
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

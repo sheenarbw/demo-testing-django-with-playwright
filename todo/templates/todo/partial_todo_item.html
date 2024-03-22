@@ -1,6 +1,6 @@
 <div 
     id="item-{{ item.id }}" 
-    class="{{ styles.surface2 }} flex justify-between " 
+    class="todo_item {{ styles.surface2 }} flex justify-between " 
     >  
 
     <div >
@@ -26,9 +26,8 @@
             {{ item.title }}
             </span>
         </div>
-        <div >
+        <div>
 
-            
             <button 
             hx-target="#item-{{ item.id }}" 
             hx-swap="outerHTML"
@@ -40,3 +39,4 @@
         
     </div>
 </div>
+

@@ -1,5 +1,6 @@
 {% load tailwind_filters %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <html lang="en">
 <head>
@@ -10,6 +11,8 @@
     <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="{% static 'todo/utils.js' %}"></script>
 
 </head>
 <body>
@@ -28,7 +31,7 @@
             
         </div>
 
-        <div class="text-center text-2xl font-bold text-transparent/30" id="todo_items_empty">
+        <div class="text-center text-2xl font-bold text-transparent/30 pt-6" id="todo_items_empty">
             Nothing to see
         </div>
     
