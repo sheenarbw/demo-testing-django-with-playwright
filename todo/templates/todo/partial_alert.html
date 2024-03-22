@@ -1,11 +1,24 @@
 {% with get_uuid as div_id %}
 
-<div class="absolute inset-x-0 top-2 flex justify-center" id="{{ div_id }}">
-    <div class="border-2 border-solid rounded-lg shadow-md bg-white pl-4 pr-4 pt-2 pb-2 space-y-2">
+<div 
+    class="absolute inset-x-0 top-2 flex justify-center pointer-events-none" 
+    id="{{ div_id }}" 
+    x-data="{ open: true }">
 
-        <h2 class="{{ styles.h2 }}">
-            {{ heading }}
-        </h2>
+    <div 
+        class="border-2 border-solid rounded-lg shadow-md bg-white pl-4 pr-4 pt-2 pb-2 space-y-2 pointer-events-auto"
+        x-show="open"
+        >
+        <div class="flex justify-between space-x-4">
+
+            <h2 class="{{ styles.h2 }}">
+                {{ heading }}
+            </h2>
+
+            <button 
+                x-on:click="open = false"
+                >X</button>
+        </div>
         <p>
             {{ message }}
         </p>

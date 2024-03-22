@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO List</title>
+    <title>Things to do</title>
 
     <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -15,8 +15,8 @@
 <body>
 
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-4 pt-4">
-        <h1 class="{{styles.h1}}">TODO list</h1>
-        <div class="{{ styles.surface }} pb-4 space-y-2">
+        <h1 class="{{styles.h1}}">Things to do</h1>
+        
 
         <div id="todo_items" class="space-y-2">
 
@@ -24,30 +24,35 @@
             
                 {% include "todo/partial_todo_item.html" %}
         
-            {% empty %}
-        
-        Nothing to see here
-        
-        {% endfor %}
-    </div>
+            {% endfor %}
+            
+        </div>
+
+        <div class="text-center text-2xl font-bold text-transparent/30" id="todo_items_empty">
+            Nothing to see
+        </div>
+    
+</div>
+
+<div class="absolute inset-x-0 bottom-2 flex justify-center">
+    <div>
 
         <h2 class="{{styles.h2}} text-center">Add Item</h2>
-            
-            <form 
-                hx-post="{% url 'action_add_new_todo' %}"
-                hx-target="#todo_items"
-                hx-swap="beforeend"
-                >
-                {% csrf_token %}
-                {{ add_form | crispy }}
-                <input 
-                    type="submit" 
-                    value="Submit" 
-                    class="{{ styles.button_primary }}"
-                    >
-            </form>
-        </div>
         
+        <form 
+        hx-post="{% url 'action_add_new_todo' %}"
+        hx-target="#todo_items"
+        hx-swap="beforeend"
+        >
+        {% csrf_token %}
+        {{ add_form | crispy }}
+        <input 
+        type="submit" 
+        value="Add" 
+        class="{{ styles.button_primary }}"
+        >
+    </form>
+</div>
     </div>
 </body>
 </html>
