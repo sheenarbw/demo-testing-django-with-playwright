@@ -1,0 +1,21 @@
+{% with get_uuid as div_id %}
+
+<div class="absolute inset-x-0 top-2 flex justify-center" id="{{ div_id }}">
+    <div class="border-2 border-solid rounded-lg shadow-md bg-white pl-4 pr-4 pt-2 pb-2 space-y-2">
+
+        <h2 class="{{ styles.h2 }}">
+            {{ heading }}
+        </h2>
+        <p>
+            {{ message }}
+        </p>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        document.getElementById("{{ div_id }}").remove();
+    }, 4000);   
+</script>
+
+{% endwith %}

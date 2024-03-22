@@ -12,12 +12,16 @@ styles = {
 
     'surface2': f'border-solid border border-{primary_color}-100 rounded-lg shadow-md bg-white pl-4 pr-4 pt-2 pb-2',
 
+
+
     'h1': "text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight",
     'h2': "text-xl font-bold leading-7 text-gray-800 sm:truncate sm:text-2xl sm:tracking-tight"
 
 }
 
+import uuid 
 def styles_context(request):
     return {
         "styles": styles,
+        "get_uuid": lambda: str(uuid.uuid4())
     }

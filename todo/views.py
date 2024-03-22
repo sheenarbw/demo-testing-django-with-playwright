@@ -38,10 +38,22 @@ def action_toggle_todo(request, item_id):
     item = models.TodoItem.objects.get(id=item_id)
     item.completed = not item.completed 
     item.save()
-    return render(request, "todo/partial_todo_item.html", {"item": item})
+
+    if item.completed:
+        return render(request, "todo/partial_alert.html", {
+            "heading": f"Item completed",
+            "message": f"Marked item '{item.title}' as completed"})
+    else: 
+        return render(request, "todo/partial_alert.html", {
+            "heading": f"Item marked as incomplete",
+            "message": f"Marked item '{item.title}' as incomplete"})
+   
 
 
 def action_delete_todo(request, item_id):
     item = models.TodoItem.objects.get(id=item_id)
     item.delete() 
-    return HttpResponse("")
+    return render(request, "todo/partial_alert.html", {
+        "heading": f"Item deleted successfully",
+        "message": f"Deleted item '{item.title}' successfully"})
+    # return HttpResponse("")

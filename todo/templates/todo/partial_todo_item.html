@@ -1,29 +1,42 @@
-<div class="{{ styles.surface2 }}" id="item-{{ item.id }}" >  
+<div 
+    id="item-{{ item.id }}" 
+    class="{{ styles.surface2 }} flex justify-between " 
+    >  
 
-    <input 
+    <div >
+
+        <input 
         type="checkbox" 
         class="h-6 w-6 rounded border-{{styles.primary_color}}-300 text-{{styles.primary_color}}-600
         accent-{{styles.primary_color}}-400 
         cursor-pointer
+        inline-block align-middle
         "
         {% if item.completed %}
-            checked
+        checked
         {% endif %}
-
+        
         hx-get="{% url 'action_toggle_todo' item.id %}"
+        hx-target="body"
+        hx-swap="afterbegin"
         />
+        
+        <span class="inline-block align-middle px-2 font-semibold font-normal
+        ">
+            {{ item.title }}
+            </span>
+        </div>
+        <div >
 
-    <!-- <span class="cursor-pointer"> -->
-        {{ item.title }}
-    <!-- </span> -->
-    
-    <button 
-    hx-target="#item-{{ item.id }}" 
-    hx-swap="outerHTML"
-    hx-get="{% url 'action_delete_todo' item.id %}"   
-    class="{{ styles.button_secondary }}"
-    >
-    Delete
-</button>
-
+            
+            <button 
+            hx-target="#item-{{ item.id }}" 
+            hx-swap="outerHTML"
+            hx-get="{% url 'action_delete_todo' item.id %}"   
+            class="{{ styles.button_secondary }} inline-block align-middle"
+            >
+            Delete
+        </button>
+        
+    </div>
 </div>
