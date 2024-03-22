@@ -1,0 +1,53 @@
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-4 pt-4">
+        <h1 class="{{styles.h1}}">TODO list</h1>
+        <div class="{{ styles.surface }} pb-4 space-y-2">
+
+        <div id="todo_items" class="space-y-2">
+
+            {% for item in todo_items %}
+            
+                {% include "todo/partial_todo_item.html" %}
+        
+            {% empty %}
+        
+        Nothing to see here
+        
+        {% endfor %}
+    </div>
+
+        <h2 class="{{styles.h2}} text-center">Add Item</h2>
+            
+            <form 
+                hx-post="{% url 'action_add_new_todo' %}"
+                hx-target="#todo_items"
+                hx-swap="beforeend"
+                >
+                {% csrf_token %}
+                {{ add_form | crispy }}
+                <input 
+                    type="submit" 
+                    value="Submit" 
+                    class="{{ styles.button_primary }}"
+                    >
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
