@@ -13,18 +13,28 @@ from playwright.sync_api import sync_playwright
 from django.urls import reverse
 
 
-class FrontendTestMixin(StaticLiveServerTestCase):
+class FrontendTestMixin(StaticLiveServerTestCase):  # <<< Run a server
     def setUp(self):
         super().setUp()
-        self.page = self.browser.new_page()
+        self.page = self.browser.new_page()  # <<< setting up:
+        #                                    #       make a new browser page
+        #                                    #       == a tab/popup in a browser
+        # self.context = self.browser.new_context()
+        # self.context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     def tearDown(self) -> None:
         super().tearDown()
-        self.page.close()
+        self.page.close()  # <<< teardown: close the page
+        #                  # We could also use fixtures
+        # breakpoint()
+        # self.context.tracing.stop(path="trace.zip")
 
     @classmethod
     def setUpClass(cls):
-        os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+        os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = (
+            "true"  # <<< need to run sync code from an async context
+            #       #     models are sync
+        )
         super().setUpClass()
         cls.playwright = sync_playwright().start()
         cls.browser = cls.playwright.chromium.launch(headless=False)
