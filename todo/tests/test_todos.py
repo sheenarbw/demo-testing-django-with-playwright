@@ -40,8 +40,3 @@ def test_add_new_item(live_server, page: Page):
 
 
 # def test_form_clears_upon_submission(live_server, page: Page):
-# page.goto(reverse_url(live_server, "index"))
-# page.get_by_label("Title*").click()
-# page.get_by_label("Title*").fill("Foo!")
-# page.get_by_role("button", name="Add").click()
-# expect(page.get_by_label("Title*")).to_have_value("")
