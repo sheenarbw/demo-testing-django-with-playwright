@@ -41,6 +41,6 @@ python manage.py runserver
 ### Running the tests 
 
 ```
-python manage.py test
+pytest
 ```
 

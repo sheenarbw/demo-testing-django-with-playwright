@@ -3,28 +3,21 @@ Why pytest
 liveserver fixture
 page fixture
 
-
-
 pytest 
 pytest --headed --slowmo=2000 
-pytest --headed --slowmo=2000 --browser firefox
+pytest --headed --slowmo=1000 --browser firefox
 pytest --headed --slowmo=1000 --browser firefox --browser chromium
 pytest --tracing=on 
 playwright show-trace test-results/todo-tests-test-todos-py-test-add-new-item-chromium/trace.zip
+
 
 playwright codegen http://127.0.0.1:8001/
 pytest  todo/tests/test_todos.py -k test_form_clears_upon_submission
 """
 
 from playwright.sync_api import Page, expect
-import os
 from django.urls import reverse
 from todo.models import TodoItem
-
-os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = (
-    "true"  # <<< need to run sync code from an async context
-    #       #     models are sync
-)
 
 
 def reverse_url(
