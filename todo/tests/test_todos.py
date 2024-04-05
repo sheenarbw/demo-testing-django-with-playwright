@@ -20,13 +20,6 @@ from django.urls import reverse
 from todo.models import TodoItem
 
 
-def reverse_url(
-    live_server, viewname, urlconf=None, args=None, kwargs=None, current_app=None
-):
-    end = reverse(viewname, urlconf, args, kwargs, current_app)
-    return f"{live_server.url}{end}"
-
-
 def test_display_empty_list_on_first_load(live_server, page: Page):
     url = reverse_url(live_server, "index")
 
@@ -51,6 +44,13 @@ def test_add_new_item(live_server, page: Page):
 
     assert TodoItem.objects.filter(title="New item title").exists()
     assert page.get_by_test_id("todo_items_empty").is_hidden()
+
+
+def reverse_url(
+    live_server, viewname, urlconf=None, args=None, kwargs=None, current_app=None
+):
+    end = reverse(viewname, urlconf, args, kwargs, current_app)
+    return f"{live_server.url}{end}"
 
 
 # def test_form_clears_upon_submission(live_server, page: Page):
