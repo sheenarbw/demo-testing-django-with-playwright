@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods
 
 from . import models
 
@@ -19,29 +20,31 @@ class EditTodoForm(ModelForm):
         fields = ["title", "description", "due_date", "completed"]
 
 
+@require_http_methods(["GET"])
 def index(request):
     todos = models.TodoItem.objects.all()
     form = AddTodoForm()
     return render(request, "todo/index.html", {"todo_items": todos, "add_form": form})
 
 
+@require_http_methods(["POST"])
 def action_add_new_todo(request):
-    if request.method == "POST":
-        form = AddTodoForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
-            return render(request, "todo/partial_todo_item.html", {"item": instance})
-        else:
-            return render(
-                request,
-                "todo/partial_alert.html",
-                {
-                    "heading": f"Error adding item",
-                    "message": f"Error adding item: {form.errors}",
-                },
-            )
+    form = AddTodoForm(request.POST)
+    if form.is_valid():
+        instance = form.save()
+        return render(request, "todo/partial_todo_item.html", {"item": instance})
+    else:
+        return render(
+            request,
+            "todo/partial_alert.html",
+            {
+                "heading": f"Error adding item",
+                "message": f"Error adding item: {form.errors}",
+            },
+        )
 
 
+@require_http_methods(["PUT"])
 def action_toggle_todo(request, item_id):
     item = models.TodoItem.objects.get(id=item_id)
     item.completed = not item.completed
@@ -67,6 +70,7 @@ def action_toggle_todo(request, item_id):
         )
 
 
+@require_http_methods(["DELETE"])
 def action_delete_todo(request, item_id):
     item = models.TodoItem.objects.get(id=item_id)
     item.delete()
