@@ -17,9 +17,11 @@
 
     <script src="{% static 'todo/utils.js' %}"></script>
 
+
+
 </head>
 
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-4 pt-4">
         <h1 class="{{styles.h1}}">Things to do</h1>
